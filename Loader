@@ -5,6 +5,7 @@ local games = {
 
 local scriptURL = games[game.PlaceId]
 if scriptURL then
+    print("OTC have " .. game.Name .. " Script!")
     loadstring(game:HttpGet(scriptURL))()
 else 
     print("Game not supported by OTC")
