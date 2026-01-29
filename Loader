@@ -1,0 +1,11 @@
+local games = {    
+    [127742093697776] = "https://raw.githubusercontent.com/IdiotHub/Scripts/refs/heads/main/PvB/main.lua",
+    [75992362647444] = "https://raw.githubusercontent.com/IdiotHub/Scripts/refs/heads/main/Tap%20Simulator/main.lua",
+}
+
+local scriptURL = games[game.PlaceId]
+if scriptURL then
+    loadstring(game:HttpGet(scriptURL))()
+else 
+    print("Game not supported by OTC")
+end
