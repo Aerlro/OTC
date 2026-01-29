@@ -1,7 +1,7 @@
 local MPS = game:GetService("MarketplaceService")
 
 local success, gameInfo = pcall(function()
-    return MarketplaceService:GetProductInfo(game.PlaceId)
+    return MPS:GetProductInfo(game.PlaceId)
 end)
 
 local gameName = success and gameInfo.Name or "Unknown Game"
