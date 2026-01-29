@@ -1,15 +1,17 @@
-local MPS = game:GetService("MarketplaceService")
-
-local success, gameInfo = pcall(function()
-    return MPS:GetProductInfo(game.PlaceId)
-end)
-
-local gameName = success and gameInfo.Name or "Unknown Game"
+local MarketplaceService = game:GetService("MarketplaceService")
 
 local games = {    
     [85896571713843] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/BGSI/main.lua",
     [113489516847696] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/My%20Fishing%20Brainrots/main.lua",
 }
+
+-- Obține numele jocului curent
+local success, gameInfo = pcall(function()
+    return MarketplaceService:GetProductInfo(game.PlaceId)
+end)
+
+-- Dacă nu reușește, folosim doar PlaceId-ul
+local gameName = success and gameInfo.Name or ("PlaceId: " .. game.PlaceId)
 
 local scriptURL = games[game.PlaceId]
 if scriptURL then
