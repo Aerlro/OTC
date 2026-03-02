@@ -4,7 +4,9 @@ local games = {
     [75992362647444] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Tap%20Simulator/main.lua",
     [134763881293027] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20from%20Brainrots/main.lua",
     [119987266683883] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Survive%20Lava%20for%20Brainrots/main.lua"
-}  
+    [139299356663913] = "",
+    [71827913900569] = ""
+}
   
 local scriptURL = games[game.PlaceId]  
 if scriptURL then  
