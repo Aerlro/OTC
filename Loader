@@ -10,7 +10,8 @@ local games = {
     [114640202062357] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Swing%20Obby%20for%20Brainrots/main.lua",
     [92416421522960] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Slime%20RNG/main.lua",
     [123698673940079] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20a%20Lucky%20Egg/main.lua",
-    [126870639873289] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Jump%20for%20Animals/main.lua"
+    [126870639873289] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Jump%20for%20Animals/main.lua",
+    [122245938604556] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Tongue%20Escape/main.lua"
 }
   
 local scriptURL = games[game.PlaceId]  
