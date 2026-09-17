@@ -4,67 +4,233 @@ local Scripts = {
     [3] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/main3.lua"
 }
 
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "OTC_StealAnEgg"
+ScreenGui.Name = "OTC_StealAnEgg_Selector"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.Parent = CoreGui
 
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.fromOffset(320, 250)
-Frame.Position = UDim2.new(0.5, -160, 0.5, -125)
-Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-Frame.BorderSizePixel = 0
-Frame.Parent = ScreenGui
+local Main = Instance.new("Frame")
+Main.Name = "Main"
+Main.Size = UDim2.fromOffset(720, 430)
+Main.Position = UDim2.new(0.5, -360, 0.5, -215)
+Main.BackgroundColor3 = Color3.fromRGB(225, 139, 18)
+Main.BorderSizePixel = 0
+Main.Parent = ScreenGui
 
-local Corner = Instance.new("UICorner")
-Corner.CornerRadius = UDim.new(0, 10)
-Corner.Parent = Frame
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 8)
+MainCorner.Parent = Main
+
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(35, 25, 15)
+Stroke.Thickness = 4
+Stroke.Parent = Main
+
+local Scale = Instance.new("UIScale")
+Scale.Scale = 0
+Scale.Parent = Main
+
+TweenService:Create(
+    Scale,
+    TweenInfo.new(0.45, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Scale = 1}
+):Play()
 
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, 0, 0, 55)
+Title.Name = "Title"
+Title.Size = UDim2.new(1, -100, 0, 90)
+Title.Position = UDim2.new(0, 50, 0, 25)
 Title.BackgroundTransparency = 1
-Title.Text = "Choose Steal an Egg Script"
+Title.Text = "CHOOSE SCRIPT"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 19
-Title.Font = Enum.Font.GothamBold
-Title.Parent = Frame
+Title.TextSize = 54
+Title.Font = Enum.Font.GothamBlack
+Title.TextStrokeColor3 = Color3.fromRGB(25, 25, 25)
+Title.TextStrokeTransparency = 0
+Title.Parent = Main
 
-local function CreateButton(number, y)
-    local Button = Instance.new("TextButton")
-    Button.Size = UDim2.fromOffset(260, 45)
-    Button.Position = UDim2.new(0.5, -130, 0, y)
-    Button.BackgroundColor3 = Color3.fromRGB(47, 49, 54)
-    Button.BorderSizePixel = 0
-    Button.Text = "Script " .. number
-    Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button.TextSize = 16
-    Button.Font = Enum.Font.GothamMedium
-    Button.Parent = Frame
+local Close = Instance.new("TextButton")
+Close.Name = "Close"
+Close.Size = UDim2.fromOffset(55, 55)
+Close.Position = UDim2.new(1, -65, 0, -15)
+Close.BackgroundColor3 = Color3.fromRGB(75, 68, 95)
+Close.BorderSizePixel = 0
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close.TextSize = 32
+Close.Font = Enum.Font.GothamBlack
+Close.TextStrokeTransparency = 0
+Close.TextStrokeColor3 = Color3.fromRGB(25, 25, 25)
+Close.ZIndex = 10
+Close.Parent = Main
 
-    local ButtonCorner = Instance.new("UICorner")
-    ButtonCorner.CornerRadius = UDim.new(0, 7)
-    ButtonCorner.Parent = Button
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 6)
+CloseCorner.Parent = Close
 
-    Button.MouseButton1Click:Connect(function()
-        ScreenGui:Destroy()
+local CloseStroke = Instance.new("UIStroke")
+CloseStroke.Color = Color3.fromRGB(35, 25, 15)
+CloseStroke.Thickness = 3
+CloseStroke.Parent = Close
+
+Close.MouseEnter:Connect(function()
+    TweenService:Create(
+        Close,
+        TweenInfo.new(0.15),
+        {BackgroundColor3 = Color3.fromRGB(100, 90, 125)}
+    ):Play()
+end)
+
+Close.MouseLeave:Connect(function()
+    TweenService:Create(
+        Close,
+        TweenInfo.new(0.15),
+        {BackgroundColor3 = Color3.fromRGB(75, 68, 95)}
+    ):Play()
+end)
+
+Close.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+local Container = Instance.new("Frame")
+Container.Name = "Scripts"
+Container.Size = UDim2.new(1, -80, 0, 230)
+Container.Position = UDim2.new(0, 40, 0, 135)
+Container.BackgroundTransparency = 1
+Container.Parent = Main
+
+local Layout = Instance.new("UIListLayout")
+Layout.FillDirection = Enum.FillDirection.Horizontal
+Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+Layout.VerticalAlignment = Enum.VerticalAlignment.Center
+Layout.Padding = UDim.new(0, 18)
+Layout.Parent = Container
+
+local function CreateScriptCard(number)
+    local Card = Instance.new("Frame")
+    Card.Name = "Script" .. number
+    Card.Size = UDim2.fromOffset(195, 210)
+    Card.BackgroundColor3 = Color3.fromRGB(255, 202, 50)
+    Card.BorderSizePixel = 0
+    Card.Parent = Container
+
+    local CardCorner = Instance.new("UICorner")
+    CardCorner.CornerRadius = UDim.new(0, 12)
+    CardCorner.Parent = Card
+
+    local CardStroke = Instance.new("UIStroke")
+    CardStroke.Color = Color3.fromRGB(70, 45, 10)
+    CardStroke.Thickness = 3
+    CardStroke.Parent = Card
+
+    local Number = Instance.new("TextLabel")
+    Number.Size = UDim2.new(1, 0, 0, 70)
+    Number.Position = UDim2.new(0, 0, 0, 12)
+    Number.BackgroundTransparency = 1
+    Number.Text = tostring(number)
+    Number.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Number.TextSize = 58
+    Number.Font = Enum.Font.GothamBlack
+    Number.TextStrokeTransparency = 0
+    Number.TextStrokeColor3 = Color3.fromRGB(35, 25, 10)
+    Number.Parent = Card
+
+    local Label = Instance.new("TextLabel")
+    Label.Size = UDim2.new(1, -20, 0, 35)
+    Label.Position = UDim2.new(0, 10, 0, 78)
+    Label.BackgroundTransparency = 1
+    Label.Text = "STEAL AN EGG"
+    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Label.TextSize = 17
+    Label.Font = Enum.Font.GothamBlack
+    Label.TextStrokeTransparency = 0
+    Label.TextStrokeColor3 = Color3.fromRGB(40, 30, 10)
+    Label.Parent = Card
+
+    local Select = Instance.new("TextButton")
+    Select.Name = "Select"
+    Select.Size = UDim2.new(1, -30, 0, 48)
+    Select.Position = UDim2.new(0, 15, 1, -62)
+    Select.BackgroundColor3 = Color3.fromRGB(255, 170, 25)
+    Select.BorderSizePixel = 0
+    Select.Text = "SELECT"
+    Select.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Select.TextSize = 20
+    Select.Font = Enum.Font.GothamBlack
+    Select.TextStrokeTransparency = 0
+    Select.TextStrokeColor3 = Color3.fromRGB(55, 35, 5)
+    Select.Parent = Card
+
+    local SelectCorner = Instance.new("UICorner")
+    SelectCorner.CornerRadius = UDim.new(0, 8)
+    SelectCorner.Parent = Select
+
+    local SelectStroke = Instance.new("UIStroke")
+    SelectStroke.Color = Color3.fromRGB(75, 45, 5)
+    SelectStroke.Thickness = 2
+    SelectStroke.Parent = Select
+
+    Select.MouseEnter:Connect(function()
+        TweenService:Create(
+            Card,
+            TweenInfo.new(0.15, Enum.EasingStyle.Quad),
+            {
+                Size = UDim2.fromOffset(202, 217),
+                BackgroundColor3 = Color3.fromRGB(255, 215, 65)
+            }
+        ):Play()
+
+        TweenService:Create(
+            Select,
+            TweenInfo.new(0.15),
+            {BackgroundColor3 = Color3.fromRGB(255, 190, 35)}
+        ):Play()
+    end)
+
+    Select.MouseLeave:Connect(function()
+        TweenService:Create(
+            Card,
+            TweenInfo.new(0.15, Enum.EasingStyle.Quad),
+            {
+                Size = UDim2.fromOffset(195, 210),
+                BackgroundColor3 = Color3.fromRGB(255, 202, 50)
+            }
+        ):Play()
+
+        TweenService:Create(
+            Select,
+            TweenInfo.new(0.15),
+            {BackgroundColor3 = Color3.fromRGB(255, 170, 25)}
+        ):Play()
+    end)
+
+    Select.MouseButton1Click:Connect(function()
+        Select.Text = "LOADING..."
 
         local success, result = pcall(function()
-            local source = game:HttpGet(Scripts[number])
-            local script = loadstring(source)
+            local Source = game:HttpGet(Scripts[number])
+            local LoadedScript = loadstring(Source)
 
-            if not script then
-                error("Failed to load Script " .. number)
+            if not LoadedScript then
+                error("Failed to compile Script " .. number)
             end
 
-            script()
+            LoadedScript()
         end)
 
+        ScreenGui:Destroy()
+
         if not success then
-            warn("[OTC] Script " .. number .. " error: " .. tostring(result))
+            warn("[OTC] Script " .. number .. " failed: " .. tostring(result))
         end
     end)
 end
 
-CreateButton(1, 65)
-CreateButton(2, 115)
-CreateButton(3, 165)
+CreateScriptCard(1)
+CreateScriptCard(2)
+CreateScriptCard(3)
