@@ -15,8 +15,8 @@ ScreenGui.Parent = CoreGui
 
 local Main = Instance.new("Frame")
 Main.Name = "Main"
-Main.Size = UDim2.fromOffset(720, 430)
-Main.Position = UDim2.new(0.5, -360, 0.5, -215)
+Main.Size = UDim2.fromOffset(500, 300)
+Main.Position = UDim2.new(0.5, -250, 0.5, -150)
 Main.BackgroundColor3 = Color3.fromRGB(225, 139, 18)
 Main.BorderSizePixel = 0
 Main.Parent = ScreenGui
@@ -42,12 +42,12 @@ TweenService:Create(
 
 local Title = Instance.new("TextLabel")
 Title.Name = "Title"
-Title.Size = UDim2.new(1, -100, 0, 90)
-Title.Position = UDim2.new(0, 50, 0, 25)
+Title.Size = UDim2.new(1, -70, 0, 60)
+Title.Position = UDim2.new(0, 35, 0, 15)
 Title.BackgroundTransparency = 1
 Title.Text = "CHOOSE SCRIPT"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 54
+Title.TextSize = 32
 Title.Font = Enum.Font.GothamBlack
 Title.TextStrokeColor3 = Color3.fromRGB(25, 25, 25)
 Title.TextStrokeTransparency = 0
@@ -55,13 +55,13 @@ Title.Parent = Main
 
 local Close = Instance.new("TextButton")
 Close.Name = "Close"
-Close.Size = UDim2.fromOffset(55, 55)
-Close.Position = UDim2.new(1, -65, 0, -15)
+Close.Size = UDim2.fromOffset(40, 40)
+Close.Position = UDim2.new(1, -48, 0, -10)
 Close.BackgroundColor3 = Color3.fromRGB(75, 68, 95)
 Close.BorderSizePixel = 0
 Close.Text = "X"
 Close.TextColor3 = Color3.fromRGB(255, 255, 255)
-Close.TextSize = 32
+Close.TextSize = 24
 Close.Font = Enum.Font.GothamBlack
 Close.TextStrokeTransparency = 0
 Close.TextStrokeColor3 = Color3.fromRGB(25, 25, 25)
@@ -99,8 +99,8 @@ end)
 
 local Container = Instance.new("Frame")
 Container.Name = "Scripts"
-Container.Size = UDim2.new(1, -80, 0, 230)
-Container.Position = UDim2.new(0, 40, 0, 135)
+Container.Size = UDim2.new(1, -50, 0, 170)
+Container.Position = UDim2.new(0, 25, 0, 90)
 Container.BackgroundTransparency = 1
 Container.Parent = Main
 
@@ -108,19 +108,19 @@ local Layout = Instance.new("UIListLayout")
 Layout.FillDirection = Enum.FillDirection.Horizontal
 Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 Layout.VerticalAlignment = Enum.VerticalAlignment.Center
-Layout.Padding = UDim.new(0, 18)
+Layout.Padding = UDim.new(0, 10)
 Layout.Parent = Container
 
 local function CreateScriptCard(number)
     local Card = Instance.new("Frame")
     Card.Name = "Script" .. number
-    Card.Size = UDim2.fromOffset(195, 210)
+    Card.Size = UDim2.fromOffset(135, 160)
     Card.BackgroundColor3 = Color3.fromRGB(255, 202, 50)
     Card.BorderSizePixel = 0
     Card.Parent = Container
 
     local CardCorner = Instance.new("UICorner")
-    CardCorner.CornerRadius = UDim.new(0, 12)
+    CardCorner.CornerRadius = UDim.new(0, 10)
     CardCorner.Parent = Card
 
     local CardStroke = Instance.new("UIStroke")
@@ -129,24 +129,24 @@ local function CreateScriptCard(number)
     CardStroke.Parent = Card
 
     local Number = Instance.new("TextLabel")
-    Number.Size = UDim2.new(1, 0, 0, 70)
-    Number.Position = UDim2.new(0, 0, 0, 12)
+    Number.Size = UDim2.new(1, 0, 0, 50)
+    Number.Position = UDim2.new(0, 0, 0, 5)
     Number.BackgroundTransparency = 1
     Number.Text = tostring(number)
     Number.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Number.TextSize = 58
+    Number.TextSize = 42
     Number.Font = Enum.Font.GothamBlack
     Number.TextStrokeTransparency = 0
     Number.TextStrokeColor3 = Color3.fromRGB(35, 25, 10)
     Number.Parent = Card
 
     local Label = Instance.new("TextLabel")
-    Label.Size = UDim2.new(1, -20, 0, 35)
-    Label.Position = UDim2.new(0, 10, 0, 78)
+    Label.Size = UDim2.new(1, -10, 0, 25)
+    Label.Position = UDim2.new(0, 5, 0, 55)
     Label.BackgroundTransparency = 1
     Label.Text = "STEAL AN EGG"
     Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Label.TextSize = 17
+    Label.TextSize = 12
     Label.Font = Enum.Font.GothamBlack
     Label.TextStrokeTransparency = 0
     Label.TextStrokeColor3 = Color3.fromRGB(40, 30, 10)
@@ -154,13 +154,13 @@ local function CreateScriptCard(number)
 
     local Select = Instance.new("TextButton")
     Select.Name = "Select"
-    Select.Size = UDim2.new(1, -30, 0, 48)
-    Select.Position = UDim2.new(0, 15, 1, -62)
+    Select.Size = UDim2.new(1, -20, 0, 38)
+    Select.Position = UDim2.new(0, 10, 1, -48)
     Select.BackgroundColor3 = Color3.fromRGB(255, 170, 25)
     Select.BorderSizePixel = 0
     Select.Text = "SELECT"
     Select.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Select.TextSize = 20
+    Select.TextSize = 15
     Select.Font = Enum.Font.GothamBlack
     Select.TextStrokeTransparency = 0
     Select.TextStrokeColor3 = Color3.fromRGB(55, 35, 5)
@@ -180,7 +180,7 @@ local function CreateScriptCard(number)
             Card,
             TweenInfo.new(0.15, Enum.EasingStyle.Quad),
             {
-                Size = UDim2.fromOffset(202, 217),
+                Size = UDim2.fromOffset(142, 167),
                 BackgroundColor3 = Color3.fromRGB(255, 215, 65)
             }
         ):Play()
@@ -197,7 +197,7 @@ local function CreateScriptCard(number)
             Card,
             TweenInfo.new(0.15, Enum.EasingStyle.Quad),
             {
-                Size = UDim2.fromOffset(195, 210),
+                Size = UDim2.fromOffset(135, 160),
                 BackgroundColor3 = Color3.fromRGB(255, 202, 50)
             }
         ):Play()
