@@ -4,12 +4,10 @@ local Scripts = {
     [3] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/main3.lua"
 }
 
-local CoreGui = game:GetService("CoreGui")
-
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "OTC_StealAnEgg"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = CoreGui
+ScreenGui.Parent = game:GetService("CoreGui")
 
 local Frame = Instance.new("Frame")
 Frame.Size = UDim2.fromOffset(320, 250)
@@ -31,78 +29,16 @@ Title.TextSize = 19
 Title.Font = Enum.Font.GothamBold
 Title.Parent = Frame
 
-local function LoadScript(number)
-    local url = Scripts[number]
-
-    print("[OTC] Selected Script: " .. tostring(number))
-    print("[OTC] URL: " .. tostring(url))
-
-    if not url then
-        warn("[OTC] Script URL not found!")
-        return
-    end
-
-    local success, result = pcall(function()
-        print("[OTC] Downloading Script " .. tostring(number) .. "...")
-
-        local source = game:HttpGet(url)
-
-        print("[OTC] Downloaded: " .. tostring(#source) .. " characters")
-
-        if not source or source == "" then
-            error("Empty source")
-        end
-
-        local compiled, compileError = loadstring(source)
-
-        if not compiled then
-            error(
-                "LOADSTRING ERROR:\n" ..
-                tostring(compileError)
-            )
-        end
-
-        print("[OTC] Script " .. tostring(number) .. " compiled successfully")
-
-        local executeSuccess, executeError = pcall(function()
-            compiled()
-        end)
-
-        if not executeSuccess then
-            error(
-                "EXECUTION ERROR:\n" ..
-                tostring(executeError)
-            )
-        end
-
-        print("[OTC] Script " .. tostring(number) .. " executed successfully")
-    end)
-
-    if not success then
-        warn("================================")
-        warn("[OTC] SCRIPT " .. tostring(number) .. " FAILED")
-        warn("================================")
-        warn(tostring(result))
-        warn("================================")
-    end
-end
-
 local function CreateButton(number, y)
     local Button = Instance.new("TextButton")
-
-    Button.Name = "Script" .. tostring(number)
     Button.Size = UDim2.fromOffset(260, 45)
     Button.Position = UDim2.new(0.5, -130, 0, y)
-
     Button.BackgroundColor3 = Color3.fromRGB(47, 49, 54)
     Button.BorderSizePixel = 0
-
-    Button.Text = "Script " .. tostring(number)
+    Button.Text = "Script " .. number
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
     Button.TextSize = 16
     Button.Font = Enum.Font.GothamMedium
-
-    Button.AutoButtonColor = true
     Button.Parent = Frame
 
     local ButtonCorner = Instance.new("UICorner")
@@ -110,16 +46,22 @@ local function CreateButton(number, y)
     ButtonCorner.Parent = Button
 
     Button.MouseButton1Click:Connect(function()
-        print("[OTC] Button clicked: Script " .. tostring(number))
-
-        Button.Active = false
-        Button.Text = "Loading..."
-
-        task.wait(0.1)
-
         ScreenGui:Destroy()
 
-        LoadScript(number)
+        local success, result = pcall(function()
+            local source = game:HttpGet(Scripts[number])
+            local script = loadstring(source)
+
+            if not script then
+                error("Failed to load Script " .. number)
+            end
+
+            script()
+        end)
+
+        if not success then
+            warn("[OTC] Script " .. number .. " error: " .. tostring(result))
+        end
     end)
 end
 
