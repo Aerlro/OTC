@@ -43,32 +43,47 @@ local function LoadScript(number)
     end
 
     local success, result = pcall(function()
-        print("[OTC] Downloading Script " .. number .. "...")
+        print("[OTC] Downloading Script " .. tostring(number) .. "...")
 
         local source = game:HttpGet(url)
 
-        print("[OTC] Downloaded " .. tostring(#source) .. " characters")
+        print("[OTC] Downloaded: " .. tostring(#source) .. " characters")
 
         if not source or source == "" then
-            error("Script returned an empty source")
+            error("Empty source")
         end
 
         local compiled, compileError = loadstring(source)
 
         if not compiled then
-            error("Compile error: " .. tostring(compileError))
+            error(
+                "LOADSTRING ERROR:\n" ..
+                tostring(compileError)
+            )
         end
 
-        print("[OTC] Script " .. number .. " compiled successfully")
+        print("[OTC] Script " .. tostring(number) .. " compiled successfully")
 
-        compiled()
+        local executeSuccess, executeError = pcall(function()
+            compiled()
+        end)
 
-        print("[OTC] Script " .. number .. " executed successfully")
+        if not executeSuccess then
+            error(
+                "EXECUTION ERROR:\n" ..
+                tostring(executeError)
+            )
+        end
+
+        print("[OTC] Script " .. tostring(number) .. " executed successfully")
     end)
 
     if not success then
-        warn("[OTC] Script " .. tostring(number) .. " failed!")
-        warn("[OTC] Error: " .. tostring(result))
+        warn("================================")
+        warn("[OTC] SCRIPT " .. tostring(number) .. " FAILED")
+        warn("================================")
+        warn(tostring(result))
+        warn("================================")
     end
 end
 
