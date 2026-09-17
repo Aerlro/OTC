@@ -14,29 +14,13 @@ local games = {
     [122245938604556] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Tongue%20Escape/main.lua",
     [92637789841354] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Clean%20all%20the%20Leaves/main.lua",
     [100068273119174] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Clean%20all%20the%20Leaves/main.lua",
-    [107778070777162] = {
-        "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/main.lua",
-        "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/main2.lua",
-        "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/main3.lua"
-    }
+    [107778070777162] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/gui.lua"
 }
 
 local scriptURL = games[game.PlaceId]
 
 if scriptURL then
-    if type(scriptURL) == "table" then
-        for _, url in ipairs(scriptURL) do
-            local success, result = pcall(function()
-                return loadstring(game:HttpGet(url))()
-            end)
-
-            if not success then
-                warn("Failed to load script: " .. tostring(result))
-            end
-        end
-    else
-        loadstring(game:HttpGet(scriptURL))()
-    end
+    loadstring(game:HttpGet(scriptURL))()
 else
     print("Game not supported on OTC Script!")
 end
