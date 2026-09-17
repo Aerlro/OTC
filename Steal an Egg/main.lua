@@ -24010,3 +24010,4 @@ end;
     end
     print("[UI] OTC ready")
     v1102("boot", "game logic attached · OTCDump() in F9")
+end)()
