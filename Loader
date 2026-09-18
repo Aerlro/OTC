@@ -20,28 +20,17 @@ local games = {
     [107778070777162] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/gui.lua"
 }
 
-print("=== OTC Loader Debug ===")
-print("PlaceId:", game.PlaceId)
-print("loadstring:", loadstring)
-print("HttpGet:", game.HttpGet)
-
 local scriptURL = games[game.PlaceId]
 
 if not scriptURL then
-    warn("Game not supported on OTC Script!")
     return
 end
 
-print("Game supported!")
-print("URL:", scriptURL)
-
 if type(game.HttpGet) ~= "function" then
-    warn("ERROR: game:HttpGet is not available!")
     return
 end
 
 if type(loadstring) ~= "function" then
-    warn("ERROR: loadstring is not available!")
     return
 end
 
@@ -49,41 +38,18 @@ local success, response = pcall(function()
     return game:HttpGet(scriptURL)
 end)
 
-if not success then
-    warn("HttpGet failed:", response)
+if not success or type(response) ~= "string" or response == "" then
     return
 end
 
-if type(response) ~= "string" or response == "" then
-    warn("ERROR: HTTP response is empty or invalid!")
-    return
-end
-
-print("Downloaded:", #response, "characters")
-
-local successCompile, fn = pcall(function()
+local wwe, fn = pcall(function()
     return loadstring(response)
 end)
 
-if not successCompile then
-    warn("loadstring failed:", fn)
+if not wwe or type(fn) ~= "function" then
     return
 end
 
-if type(fn) ~= "function" then
-    warn("ERROR: loadstring returned:", typeof(fn))
-    return
-end
-
-print("Script compiled successfully!")
-
-local successRun, err = pcall(function()
+pcall(function()
     fn()
 end)
-
-if not successRun then
-    warn("=== SCRIPT ERROR ===")
-    warn(err)
-else
-    print("=== OTC Script Loaded ===")
-end
