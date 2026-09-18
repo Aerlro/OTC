@@ -21,16 +21,7 @@ local games = {
 }
 
 local scriptURL = games[game.PlaceId]
-
 if not scriptURL then
-    return
-end
-
-if type(game.HttpGet) ~= "function" then
-    return
-end
-
-if type(loadstring) ~= "function" then
     return
 end
 
@@ -42,14 +33,9 @@ if not success or type(response) ~= "string" or response == "" then
     return
 end
 
-local wwe, fn = pcall(function()
-    return loadstring(response)
-end)
-
+local wwe, fn = pcall(loadstring, response)
 if not wwe or type(fn) ~= "function" then
     return
 end
 
-pcall(function()
-    fn()
-end)
+pcall(fn)
