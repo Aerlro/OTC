@@ -14,6 +14,7 @@ local games = {
     [122245938604556] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Tongue%20Escape/main.lua",
     [92637789841354] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Clean%20all%20the%20Leaves/main.lua",
     [100068273119174] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Clean%20all%20the%20Leaves/main.lua",
+    [77108422251420] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Search%20for%20the%20Needle/main.lua"
     [107778070777162] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Steal%20an%20Egg/gui.lua"
 }
 
