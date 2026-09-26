@@ -21,7 +21,8 @@ local games = {
 },
     [124216119978534] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Ride%20a%20Pet/main.lua",
     [113290951185459] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/Anime%20Dice/main.lua",
-    [118805555015549] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Loot%20to%20Forge/main.lua"
+    [118805555015549] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Loot%20to%20Forge/main.lua",
+    [80242821185181] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Wing%20for%20Eggs/main.lua"
 
 local scriptURL = games[game.PlaceId]
 if not scriptURL then
