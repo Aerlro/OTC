@@ -24,8 +24,77 @@ local games = {
     [80242821185181] = "https://raw.githubusercontent.com/Aerlro/OTC/refs/heads/main/%2B1%20Wing%20for%20Eggs/main.lua"
 }
 
+print("=== OTC LOADER DEBUG ===")
+print("PlaceId:", game.PlaceId)
+print("loadstring:", loadstring)
+print("game.HttpGet:", game.HttpGet)
+
 local scriptURL = games[game.PlaceId]
 
-if scriptURL then
-    loadstring(game:HttpGet(scriptURL))()
+print("scriptURL:", scriptURL)
+
+if not scriptURL then
+    warn("ERROR: PlaceId not found in games table")
+    return
+end
+
+print("Downloading script...")
+
+local success, response = pcall(function()
+    return game:HttpGet(scriptURL)
+end)
+
+print("HttpGet success:", success)
+print("Response type:", type(response))
+
+if not success then
+    warn("HttpGet ERROR:", response)
+    return
+end
+
+if type(response) ~= "string" then
+    warn("ERROR: response is not a string")
+    return
+end
+
+print("Downloaded characters:", #response)
+
+if response == "" then
+    warn("ERROR: response is empty")
+    return
+end
+
+print("Compiling with loadstring...")
+
+local compileSuccess, fn = pcall(function()
+    return loadstring(response)
+end)
+
+print("Compile success:", compileSuccess)
+print("Compiled function:", fn)
+print("Compiled type:", type(fn))
+
+if not compileSuccess then
+    warn("LOADSTRING ERROR:", fn)
+    return
+end
+
+if type(fn) ~= "function" then
+    warn("ERROR: loadstring returned something that is not a function")
+    return
+end
+
+print("Executing script...")
+
+local runSuccess, runError = pcall(function()
+    fn()
+end)
+
+print("Run success:", runSuccess)
+
+if not runSuccess then
+    warn("=== SCRIPT ERROR ===")
+    warn(runError)
+else
+    print("=== SCRIPT LOADED SUCCESSFULLY ===")
 end
